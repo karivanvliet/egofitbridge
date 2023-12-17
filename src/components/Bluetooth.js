@@ -1,15 +1,4 @@
 export function Connect(props) {
-    function handleNotifications(event) {
-        console.log(event)
-        let value = event.target.value;
-        let a = [];
-        for (let i = 0; i < value.byteLength; i++) {
-          a.push(('00' + value.getUint8(i).toString(16)).slice(-2));
-        }
-        console.log('> ' + a.join(' '));
-        //displayValues(a);
-    }
-
     async function connect() {
         const customService = '0000fff0-0000-1000-8000-00805f9b34fb';
         const notifyUUID = '0000fff1-0000-1000-8000-00805f9b34fb';
@@ -28,7 +17,7 @@ export function Connect(props) {
         await notifyChar.startNotifications();
         console.log('Notifications started')
         notifyChar.addEventListener('characteristicvaluechanged',
-            handleNotifications);
+            props.handleDataChange);
 
         props.handleServiceChange(pService);
     }
