@@ -1,10 +1,102 @@
-.App {
+* {
+  box-sizing: border-box;
+  
+}
+
+#current-section {
+  max-width: 50%;
+  min-height: 300px;
+  margin: 20px;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.currentSessionForm{
+  display: flex;
+  /* max-width: 50%; */
+  flex-wrap: wrap;
+  min-height: 300px;
+  margin: 10px 30px;
+  background-color: white;
+  color: #20302A;
+  border: none;
+  border-radius: 30px;
+  gap: 5px;
+  align-items: center;
+  justify-content:flex-start;
+  font-size: 1.5rem;
+  
+}
+
+.currentSessionForm legend{
+  float: left;
+  margin-left: 30px;
+  color: #20302A;
+  font-size: 3rem;
+}
+
+.displayField {
+  display:block;
+  flex-basis: 45%;
+  flex-grow: 1;
+  margin:0.5rem;
+  text-align: center;
+}
+
+.displayFieldSteps {
+  flex-basis: 90%;
+}
+
+.displayField input {
+  display: block;
+  height: 60px;
+  background-color: #39574B;
+  color: white;
+  border: solid #39574B;
+  border-radius: 20px;
+  width: 80%;
+  font-size: 2.5rem;
+  text-align: center;
+  margin: 10px auto;
+}
+
+.displayField input:focus {
+  outline: none;
+}
+
+.button {
+  background-color: #527A6B;
+  width: 200px;
+  height: 50px;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-size: 1rem;
+}
+
+.button:hover {
+  background-color: #39574B;
+}
+
+.connect-button {
+  margin: 10px auto;
+}
+
+header {
+  display: flex;
+  background-color: #20302A;
+  color: white;
+  height: 5rem;
+  font-size: 1rem;
+  justify-content: space-between;
+}
+
+header h1 {
+  margin: auto 20px;
+}
+
+#signInDiv {
+  display: inline-block;
+  margin: auto 10px;
 }
 
 @media (prefers-reduced-motion: no-preference) {
