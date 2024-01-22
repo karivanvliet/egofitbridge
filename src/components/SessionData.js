@@ -14,7 +14,7 @@ export function SessionData(props) {
 
     return (
         <>
-            <fieldset id="display-data" className="currentSessionForm">
+            <fieldset id="display-data" className="sessionForm">
                 <legend>Current Session</legend>
                 <label htmlFor="steps"  className="displayField displayFieldSteps">Step Count
                     <input id="steps" value={treadmillData.steps} readOnly />

@@ -39,7 +39,7 @@ export async function retrieveDataSource(accessToken){
         dataSource = await response.json()
         if (dataSource.error){
             if(dataSource.error.status === "NOT_FOUND"){
-                throw new Error('DataResource does not exist')
+                throw new Error('DataSource does not exist')
             }
         }
     } catch (e) {
@@ -83,7 +83,7 @@ export async function retrieveDataSource(accessToken){
 export async function insertSteps(treadmillData, accessToken) {
     console.log(treadmillData)
     const dataTypeName = "com.google.step_count.delta";
-    const endTimeNs = Date.now()*1000000 // current time in nanoseconds;
+    const endTimeNs = treadmillData.endTime*1000000 // current time in nanoseconds;
     const startTimeNs = endTimeNs - (treadmillData.sessionTimeSec*1000000000);
     const value = treadmillData.steps;
 
@@ -114,7 +114,9 @@ export async function insertSteps(treadmillData, accessToken) {
         body: JSON.stringify(body)
     })
 
-    const addComplete = await addResponse.json();
-    console.log(addComplete)
+    // const addComplete = await addResponse.json();
+    // console.log(addComplete)
+
+    return addResponse.json();
 
 }
