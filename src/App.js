@@ -132,7 +132,7 @@ function App() {
     <div className="App">
       <header>
         <span>
-          <h1>Treadmill → GoogleFit</h1>
+          <h1>Treadmill → Google Fit</h1>
           <h2>for the EgoFit Walker Pro</h2>
         </span>
         <button type="submit" onClick={requestToken} title="Sign in with Google" className={user.name ? 'hidden' : 'signInButton'}>

@@ -16,7 +16,7 @@ function SessionSummary(props) {
         </label>
         <label htmlFor="secondsSum" className="displayFieldSummary">
           <span>Session Time (MM:SS):</span>
-          <input id="secondsSum" value={`${timeMin} : ${timeSec}`} readOnly />
+          <input id="secondsSum" value={`${timeMin}:${timeSec}`} readOnly />
         </label>
 
         <label htmlFor="distanceSum" className="displayFieldSummary">

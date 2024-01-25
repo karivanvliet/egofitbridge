@@ -350,6 +350,10 @@ footer a:visited {
   header span {
     margin: auto 5px;
   }
+
+  .displayFieldSummary input {
+    font-size: 1.25rem;
+  }
 }
 
 /* Custom Scroll bar */
