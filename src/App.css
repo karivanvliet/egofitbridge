@@ -1,16 +1,151 @@
+/* Page Styles */
 * {
   box-sizing: border-box;
   font-family: "Urbanist";
 }
 
-.mainDisplay {
-  display: flex;
+body {
+  margin: 0;
 }
 
-#summary-section {
-  max-width: 40%;
-  min-height: 300px;
-  margin: 20px;
+.App {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #E7EFEB;
+}
+
+/* Header and Footer */
+header {
+  display: flex;
+  background-color: #20302A;
+  color: white;
+  height: 5rem;
+  font-size: 1rem;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom-right-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+
+header span {
+  margin: auto 20px;
+}
+
+header h1 {
+  display: inline-block;
+  margin: auto 20px;
+  font-weight: normal;
+}
+
+header h2 {
+  display: inline-block;
+  margin: auto 0px;
+  font-weight: normal;
+  font-size: 1.25rem;
+}
+
+.signInButton {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content:space-around;
+  border-radius: 4px;
+  border: none;
+  gap: 5px;
+  margin-right: 10px;
+}
+
+.signInButton img {
+  height: 40%;
+  margin-left: 10px;
+}
+
+.signInButton span {
+  margin: auto 5px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.signInDiv {
+  display: inline-block;
+  margin: auto 10px;
+  flex-shrink: 1;
+}
+
+.signOut {
+  background-color: #A9C6BA;
+  border-radius: 4px;
+  border: #A9C6BA solid;
+}
+
+.profile {
+  display: flex;
+  gap: 10px;
+  justify-content: space-around;
+  align-items: center;
+  margin-right: 10px;
+  height: 100%;
+}
+
+.userInfo {
+  height: 100%;
+  text-align: center;
+}
+
+.userInfo img {
+  height: 60%;
+  border-radius: 100%;
+  margin-top: 5px;
+}
+
+.userInfo p {
+  margin: 0;
+}
+
+footer {
+  margin-top: auto;
+  width: 100%;
+  min-height: 3rem;
+  text-align: center;
+  border-top: solid 1px #A9C6BA;
+  background-color: #A9C6BA;
+  border-top-right-radius: 8px;
+  border-top-left-radius: 8px;
+  padding-top: 5px;
+}
+
+footer div a{
+  font-size: 12px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+footer a {
+  color: #20302A;
+}
+
+footer a:visited {
+  color:#20302A;
+}
+
+.fa {
+  font-size: 25px;
+  width: 50px;
+  text-align: center;
+  text-decoration: none;
+  margin: 5px 2px;
+}
+
+
+/* Data Display Styles */
+
+.mainDisplay {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.displaySection {
+  width: 47%;
+  margin: 10px;
   text-align: center;
 }
 
@@ -41,33 +176,23 @@
   width: 275px;
 }
 
-#current-section {
-  width: 50%;
-  min-height: 300px;
-  margin: 20px;
-  text-align: center;
-}
-
 .sessionForm{
   display: flex;
-  /* max-width: 50%; */
   flex-wrap: wrap;
-  min-height: 300px;
-  margin: 10px 30px;
+  margin: 10px 20px;
   background-color: white;
   color: #20302A;
   border: none;
   border-radius: 30px;
   gap: 5px;
   align-items: center;
-  justify-content:flex-start;
+  justify-content: center;
   font-size: 1.5rem;
   
 }
 
 .sessionForm legend{
   float: left;
-  margin-left: 30px;
   color: #20302A;
   font-size: 2.5rem;
 }
@@ -101,6 +226,17 @@
   outline: none;
 }
 
+.hidden {
+  display: none;
+  width: 0;
+}
+
+.error {
+  color: red;
+}
+
+
+/* Button Styles */
 .button {
   display: flex;
   text-align: center;
@@ -115,83 +251,36 @@
   margin: 10px auto;
 }
 
+.disabledButton {
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content:space-around;
+  background-color: #7f8181;
+  width: 225px;
+  height: 50px;
+  border: none;
+  border-radius: 4px;
+  color: rgba(255, 255, 255, 0.705);
+  margin: 10px auto;
+}
+
 .button:hover {
   background-color: #39574B;
 }
 
-.button img {
-  height: 40%;
-  margin: auto 5px;
-}
-
-.logIn span {
-  margin: auto 5px;
-}
-
-header {
+.buttonDiv {
   display: flex;
-  background-color: #20302A;
-  color: white;
-  height: 5rem;
-  font-size: 1rem;
-  justify-content: space-between;
-}
-
-header span {
-  margin: auto 20px;
-}
-
-header h1 {
-  display: inline-block;
-  margin: auto 20px;
-  font-weight: normal;
-}
-
-header h2 {
-  display: inline-block;
-  margin: auto 0px;
-  font-weight: normal;
-  font-size: 1.25rem;
-}
-
-.signInDiv {
-  display: inline-block;
-  margin: auto 10px;
-}
-
-.hidden {
-  display: none;
-}
-
-.signOut {
-  background-color: #A9C6BA;
-  border-radius: 4px;
-  border: #A9C6BA solid;
-}
-
-.profile {
-  display: flex;
-  gap: 10px;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
-  margin-right: 10px;
-}
-
-.userInfo {
   height: 100%;
-  text-align: center;
+  margin-right: 33.61px;
 }
 
-.userInfo img {
-  height: 60%;
-  border-radius: 100%;
-  margin-top: 5px;
+.buttonDiv img {
+  height: 70%;
+  margin: auto 5px;
 }
-
-.userInfo p {
-  margin: 0;
-}
-
 
 .loader {
   margin: auto;
@@ -202,37 +291,82 @@ header h2 {
   border-top: 4px solid #A9C6BA;
   animation: spinner 1.5s linear infinite;
 }
+
 @keyframes spinner {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+/* Responsive screen size styles */
+@media only screen and (max-width: 965px){
+  .displaySection {
+    width: 98%;
+  }
+
+  header h2 {
+    display: block;
+    margin: auto 25px;
+    font-weight: normal;
+    font-size: 1.25rem;
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+@media only screen and (max-width: 768px){
+  header h1 {
+    font-size: 1.5rem;
+  }
+
+  header h2 {
+    font-size: 1rem;
+  }
 }
 
-.App-link {
-  color: #61dafb;
+@media only screen and (max-width: 480px){ 
+  .signInButton span {
+    display: none;
+  }
+
+  .signInButton img {
+    margin: 5px;
+  }
+
+  .displayFieldSummary span{
+    width: 230px;
+  }
+
+  .userInfo p{
+    display: none;
+  }
+
+  .userInfo img {
+    margin-top: 15px;
+  }
+
+  .profile {
+    gap: 5px;
+    margin-right: 5px;
+  }
+
+  header span {
+    margin: auto 5px;
+  }
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Custom Scroll bar */
+::-webkit-scrollbar {
+  width: 10px;
+  background-color: #E7EFEB;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #E7EFEB;
+  box-shadow: inset 0 0 5px #A9C6BA; 
+}
+ 
+::-webkit-scrollbar-thumb {
+  background: #527A6B; 
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #39574B; 
 }
