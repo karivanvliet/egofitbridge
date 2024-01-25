@@ -3,7 +3,7 @@
 A web app to collect step counts from the Egofit Walker Pro treadmill via bluetooth and add them to a Google Fit account. I built this for my own personal use because I like to track my steps using Google Fit but the treadmill I have has its own app that doesn't integrate with Google Fit.
 
 Currently deployed at: https://treadmill-to-google-fit.netlify.app/ -- 
-**Google app verification is not complete so a warning message will appear when authenticating with google**. (Google enforces verification for apps that access sensitive or restricted data, ie. fitness data)
+**Google app verification is not complete so a warning message will appear when authenticating.** (Google enforces verification for apps that access sensitive or restricted data, ie. fitness data)
 
 
 ## Features
