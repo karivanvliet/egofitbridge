@@ -183,7 +183,7 @@ function App() {
       <footer>
         {/* <span>Find me on LinkedIn or GitHub</span> */}
         <a href="https://www.linkedin.com/in/kari-van-vliet/" target="_blank" rel="noreferrer"><i className="fa fa-brands fa-linkedin" aria-label="linkedin link" /></a>
-        <a href="https://github.com/karivanvliet" target="_blank" rel="noreferrer"><i href="#" className="fa fa-brands fa-github" aria-label="github link" /></a>
+        <a href="https://github.com/karivanvliet/treadmill-bridge" target="_blank" rel="noreferrer"><i href="#" className="fa fa-brands fa-github" aria-label="github link" /></a>
         <div><a href="https://www.flaticon.com/free-icons/treadmill" title="treadmill icons">Treadmill icons created by surang - Flaticon</a></div>
       </footer>
 
