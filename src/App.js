@@ -5,21 +5,28 @@ import Connect from './components/Connect';
 import Disconnect from './components/Disconnect';
 import SessionData from './components/SessionData';
 import SessionSummary from './components/SessionSummary';
-import UploadData from './components/UploadData';
+// import UploadData from './components/UploadData';
 import parseData from './Utility/parseData';
+import bigQueryUpload from './Utility/bigQueryUpload';
+import { insertSteps } from './Utility/googleFitUtil';
 import g from './g.png';
 
 const CLIENT_ID = '578097828784-l0ieit344qhi27fas9q2gp6i3fn3smjd.apps.googleusercontent.com';
-const SCOPES = 'https://www.googleapis.com/auth/fitness.activity.read https://www.googleapis.com/auth/fitness.activity.write https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email';
+const SCOPES = 'https://www.googleapis.com/auth/fitness.activity.read https://www.googleapis.com/auth/fitness.activity.write https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/bigquery';
 
 function App() {
   const initialData = {
-    speed: '',
-    distance: '',
-    calories: '',
-    sessionTimeSec: '',
-    steps: '',
+    speed: 0,
+    distance: 0,
+    calories: 0,
+    sessionTimeSec: 0,
+    timeDelta: 0,
+    steps: 0,
+    stepDelta: 0,
+    endTime: Date.now(),
   };
+  let sessionId = crypto.randomUUID();
+  let rows = [{ json: { ...initialData, collectedDateTime: new Date().toISOString(), sessionId } }];
 
   const [server, setServer] = useState();
   const [service, setService] = useState();
@@ -41,20 +48,20 @@ function App() {
     setAccessToken('');
   };
 
-  const checkToken = async (accToken) => {
-    const tokenData = await fetch(`https://oauth2.googleapis.com/tokeninfo?access_token=${accToken}`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${accToken}`,
-      },
-    });
+  // const checkToken = async (accToken) => {
+  //   const tokenData = await fetch(`https://oauth2.googleapis.com/tokeninfo?access_token=${accToken}`, {
+  //     method: 'GET',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //       Authorization: `Bearer ${accToken}`,
+  //     },
+  //   });
 
-    const tokenDataJson = await tokenData.json();
-    if (tokenDataJson.error) {
-      throw new Error(tokenDataJson.error);
-    }
-  };
+  //   const tokenDataJson = await tokenData.json();
+  //   if (tokenDataJson.error) {
+  //     throw new Error(tokenDataJson.error);
+  //   }
+  // };
 
   const requestToken = () => {
     tokenClient.requestAccessToken();
@@ -112,21 +119,49 @@ function App() {
       const parsedData = parseData(e.target.value);
       setTreadmillData((prevData) => {
         if (parsedData.steps === 0 && parsedData.sessionTimeSec > 0 && prevData.steps) {
-          return ({ ...parsedData, steps: prevData.steps });
+          return ({
+            ...parsedData,
+            steps: prevData.steps,
+            stepDelta: 0,
+            timeDelta: parsedData.sessionTimeSec - prevData.sessionTimeSec,
+            endTime: Date.now(),
+          });
         }
-        return parsedData;
+
+        return ({
+          ...parsedData,
+          steps: parsedData.steps,
+          stepDelta: parsedData.steps - prevData.steps,
+          timeDelta: parsedData.sessionTimeSec - prevData.sessionTimeSec,
+          endTime: Date.now(),
+        });
+      });
+
+      rows.push({
+        json: {
+          ...dataStateRef.current,
+          collectedDateTime: new Date().toISOString(),
+          sessionId,
+        },
       });
     } else {
+      sessionId = crypto.randomUUID();
       if (dataStateRef.current.steps > 0) {
         setLastSession({ ...dataStateRef.current, endTime: Date.now(), uploaded: false });
       }
       setTreadmillData(initialData);
     }
+
+    if (rows.length && tokenStateRef.current) {
+      bigQueryUpload(rows, tokenStateRef.current);
+      rows = [];
+      insertSteps(dataStateRef.current, tokenStateRef.current);
+    }
   };
 
-  const toggleDataUpload = (uploadedSession) => {
-    setLastSession(uploadedSession);
-  };
+  // const toggleDataUpload = (uploadedSession) => {
+  //   setLastSession(uploadedSession);
+  // };
 
   return (
     <div className="App">
@@ -161,8 +196,8 @@ function App() {
               handleServiceChange={handleServiceChange}
               server={server}
             />
-          ) : (
-            <Connect
+          ) : (tokenStateRef.current
+            && <Connect
               handleServerChange={handleServerChange}
               handleServiceChange={handleServiceChange}
               handleDataChange={handleDataChange}
@@ -171,13 +206,13 @@ function App() {
         </section>
         <section id="summary-section" className="displaySection">
           <SessionSummary lastSession={lastSession} />
-          <UploadData
+          {/* <UploadData
             treadmillData={lastSession}
             accessToken={accessToken}
             toggleDataUpload={toggleDataUpload}
             checkToken={checkToken}
             handleSignOut={handleSignOut}
-          />
+          /> */}
         </section>
       </main>
       <footer>

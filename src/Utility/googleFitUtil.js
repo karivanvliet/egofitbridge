@@ -76,8 +76,8 @@ export async function insertSteps(treadmillData, accessToken) {
   console.log('Uploading data: ', treadmillData);
   const dataTypeName = 'com.google.step_count.delta';
   const endTimeNs = treadmillData.endTime * 1000000; // current time in nanoseconds;
-  const startTimeNs = endTimeNs - (treadmillData.sessionTimeSec * 1000000000);
-  const value = treadmillData.steps;
+  const startTimeNs = endTimeNs - (treadmillData.timeDelta * 1000000000);
+  const value = treadmillData.stepDelta;
 
   const body = {
     dataSourceId,
